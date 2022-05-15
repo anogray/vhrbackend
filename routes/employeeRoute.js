@@ -120,12 +120,12 @@ router.delete("/:id", async (req, res) => {
     const id = req.params.id;
     const deletedProduct = await Employee.findByIdAndDelete({_id:id});
     if (deletedProduct) {
-      res.status(202).send({success:true, message: "Post Deleted" });
+      return res.status(202).send({success:true, message: "Post Deleted" });
     } else {
-      res.statu(404).send({success:false, err:"Error in Deletion."});
+      return res.status(404).send({success:false, err:"Error in Deletion."});
     }
   } catch (err) {
-    res.status(404).send({success:false, errorMessage: "Post not found" });
+    return res.status(404).send({success:false, errorMessage: "Post not found" });
   }
 });
 
@@ -158,7 +158,7 @@ router.put("/:id", async (req, res) => {
     );
     return res.status(201).json({ status:true, "Data updated ": updatedPost });
   } catch (err) {
-    res.status(404).json({ success:false, errorMessage: err.message });
+    return res.status(404).json({ success:false, errorMessage: err.message });
   }
 });
 
